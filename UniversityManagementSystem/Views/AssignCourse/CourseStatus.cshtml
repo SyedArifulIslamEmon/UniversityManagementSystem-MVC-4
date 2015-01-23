@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "View Course Status";
+}
+
+
+
+
+
+<h2>View Course Status</h2>
+<hr/>
+
+<label>Department</label>
+<br/>
+<select id="DepartmentId" name="DepartmentId">
+    <option value=""></option>
+    @foreach (var dept in ViewBag.Dept)
+    {
+        <option value="@dept.Id">
+            @dept.Code
+        </option>
+    }
+</select>
+<br/><br />
+
+<div id="section-data">
+    @Html.Partial("~/Views/Shared/_FilteredCourseStatus.cshtml")
+</div>
+
+
+<script type="text/javascript">
+    function FillData(id) {
+        $("#section-data").load("/AssignCourse/FilteredCourseStatus", { departmentId: id });
+    }
+
+    $(function () {
+        $("#DepartmentId").change(function () {
+            var id = $("#DepartmentId").val();
+            FillData(id);
+        });
+    });
+</script>
+
+

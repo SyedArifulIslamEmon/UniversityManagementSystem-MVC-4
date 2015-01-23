@@ -1,0 +1,42 @@
+﻿@model UniversityManagementSystem.Models.AssignCourse
+<label>Course Code</label>
+<br/>
+@if (ViewBag.Courses != null)
+{
+    
+    <select id="CourseId" name="CourseId">
+        <option value="">Select a Course</option>
+        @foreach (var course in ViewBag.Courses)
+        {
+            <option value="@course.Id">@course.Name</option>
+        }
+    </select>
+}
+else
+{
+  <select id="CourseId" name="CourseId">
+    <option value="">Select a Course</option>
+</select>
+}
+@Html.ValidationMessageFor(model => model.CourseId)
+
+<script type="text/javascript">
+
+    function FillData2(id) {
+        $("#section-data3").load("/AssignCourse/FilteredSectionCourse", { courseId: id });
+    }
+
+
+    $(function () {
+
+        $("#CourseId").change(function () {
+            var id = $("#CourseId").val();
+            FillData2(id);
+        });
+    });
+</script>
+
+
+
+
+

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<UniversityManagementSystem.Models.EnrollCourse>
+
+@{
+    ViewBag.Title = "View All Enrolled Course";
+}
+
+<h2>View All Enrolled Course</h2><hr />
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.RegistrationId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.RegistrationId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EnrollCourseId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EnrollCourseId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EnrollCourseId })
+        </td>
+    </tr>
+}
+
+</table>

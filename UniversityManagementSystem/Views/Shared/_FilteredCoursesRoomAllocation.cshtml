@@ -1,0 +1,20 @@
+﻿@model UniversityManagementSystem.Models.RoomAllocation
+<div id="section-data">
+    <label> Course</label><br/>
+    @if (ViewBag.Courses != null)
+    {
+        <select id="CourseId" name="CourseId">
+            @foreach (var course in ViewBag.Courses)
+            {
+                <option value="@course.Id">@course.Name</option>
+            }
+        </select>
+    }
+    else
+    {
+        <select id="CourseId" name="CourseId">
+            <option value=""></option>
+        </select>
+    }
+    @Html.ValidationMessageFor(model => model.CourseId)
+</div>

@@ -1,0 +1,66 @@
+﻿@using UniversityManagementSystem.Models
+@model List<UniversityManagementSystem.Models.ViewClassSchedule>
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["error"]
+    </div>
+}
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            Course Code
+        </th>
+        <th>
+           Name
+        </th>
+        <th>
+            Schedule Info
+        </th>
+    </tr>
+
+@if(Model != null)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+               @item.CourseCode 
+            </td>
+            <td>
+                @item.CourseName
+            </td>
+            <td>
+                @if(item.RoomAllocations == null)
+                {
+                    <p>Not Schedule Yet</p>
+                }
+                else
+                {
+                    foreach (var x in item.RoomAllocations)
+                    {
+
+                        var sTime = x.StartTime.ToString().Replace(".", ":");
+                        var eTime = x.EndTime.ToString().Replace(".", ":");
+
+                        if (sTime.Length > 1)
+                        {
+                            sTime += ((sTime[sTime.Length - 2]) == ':') ? "0" : "";
+                        }
+                        if (eTime.Length > 1)
+                        {
+                            eTime += ((eTime[eTime.Length - 2]) == ':') ? "0" : "";
+                        }
+                        <p>Room No:@x.Room.Name, @x.Day.Name, @sTime - @eTime;</p>
+                    }
+                }
+            </td>
+        </tr>
+    } 
+}
+
+</table>

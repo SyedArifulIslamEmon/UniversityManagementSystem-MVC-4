@@ -1,0 +1,31 @@
+﻿
+
+           
+@if (ViewBag.Course != null)
+{
+    foreach (var course in ViewBag.Course)
+    {
+        <label>Course Name</label><br>
+        <input type="text" name="Name" value="@course.Name" readonly=""/><br>
+        <label>Course Credit</label> <br>
+    <input type="text" name="credit" value="@course.Credit" id="assigning" readonly="" /><br>
+    }
+}
+else
+{
+    <label>Course Name</label>
+    <br>
+    <input type="text" name="Name" value="" readonly=""/><br>
+    <label>Course Credit</label> <br>
+    <input type="text" name="credit" value="" id="assigning" readonly=""/><br>
+    }
+
+
+
+
+
+
+
+
+
+    

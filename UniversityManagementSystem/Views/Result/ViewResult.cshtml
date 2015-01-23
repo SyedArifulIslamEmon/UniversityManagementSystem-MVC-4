@@ -1,0 +1,54 @@
+﻿
+
+@{
+    ViewBag.Title = "View Result";
+}
+
+<h2>View Result</h2><hr/>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+
+        <label>Student Registration No</label> <br>
+
+        <div class="editor-field">
+            <select id="StudentId" name="StudentId">
+                <option value=""></option>
+                @foreach (var item in ViewBag.Results)
+                {
+                    <option value="@item.Id">@item.RegistrationId</option>
+                }
+            </select>
+        </div>
+        <br/>
+        
+
+        <div id="section-data">
+            @Html.Partial("~/Views/Shared/_FilteredViewResult2.cshtml")
+        </div>
+
+    </fieldset>
+}
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function FillData(id) {
+        $("#section-data").load("/Result/FilteredSection2", { studentId: id });
+    }
+
+    $(function () {
+        $("#StudentId").change(function () {
+            var id = $("#StudentId").val();
+            FillData(id);
+        });
+    });
+</script>

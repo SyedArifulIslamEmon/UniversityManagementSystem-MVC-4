@@ -1,0 +1,35 @@
+﻿        
+@{
+    double c = 0;
+    double r = 0;
+
+    if (ViewBag.AssigningCredit != null)
+    {
+    
+        foreach (var cc in ViewBag.AssigningCredit)
+        {
+            c = cc;
+        }
+
+        foreach (var rr in ViewBag.CreditToBeTaken)
+        {
+            r = rr.Credit;
+        }
+        r = c - r;
+        <label>Credit To Be Taken</label>
+    <br>
+    <input type="text" name="Name" value="@c" readonly=""/><br>
+    <label>Remaining Credit</label> <br>
+    <input type="text" name="Email" value="@r" id="remaining" readonly=""/><br>
+    }
+    else
+    {
+      <label>Credit To Be Taken</label>
+    <br>
+    <input type="text" name="Name" value="" readonly=""/><br>
+    <label>Remaining Credit</label> <br>
+    <input type="text" name="Email" value="" id="remaining" readonly=""/><br>
+    }
+}
+
+

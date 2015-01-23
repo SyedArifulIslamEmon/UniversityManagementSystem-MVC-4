@@ -1,0 +1,36 @@
+﻿@model UniversityManagementSystem.Models.Result
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Result</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Student.RegistrationId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Student.RegistrationId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Course.Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Course.Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Grade.GradeName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Grade.GradeName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ResultId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

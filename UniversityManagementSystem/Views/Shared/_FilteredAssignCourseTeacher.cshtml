@@ -1,0 +1,38 @@
+﻿@model UniversityManagementSystem.Models.AssignCourse
+<label>Teacher</label>
+<br />
+@if (ViewBag.Teachers != null)
+{
+    <select class="input-validation-error" id="TeacherId" name="TeacherId">
+        <option value=""></option>
+        @foreach (var teacher in ViewBag.Teachers)
+        {
+            <option value="@teacher.Id">@teacher.Name</option>
+        }
+    </select>
+}
+else
+{
+  <select id="TeacherId" name="TeacherId">
+    <option value="">Select a Teacher Name</option>
+</select>
+}
+@Html.ValidationMessageFor(model => model.TeacherId)
+
+
+<script type="text/javascript">
+    function FillData3(id) {
+        $("#section-data4").load("/AssignCourse/FilteredSectionCredit", { teacherId: id });
+    }
+
+    $(function () {
+        $("#TeacherId").change(function () {
+            var id = $("#TeacherId").val();
+            FillData3(id);
+        });
+    });
+
+</script>
+
+
+

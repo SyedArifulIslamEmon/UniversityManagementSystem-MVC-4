@@ -1,0 +1,104 @@
+﻿@model UniversityManagementSystem.Models.AssignCourse
+
+@{
+    ViewBag.Title = "Course Assign To Teacher";
+}
+
+<h2>Course Assign To Teacher</h2>
+<hr/>
+
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["error"]
+    </div>
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "assignCourse" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DepartmentId, "Department")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("DepartmentId", string.Empty)
+            @Html.ValidationMessageFor(model => model.DepartmentId)
+        </div>
+        
+        <div id="section-data">
+            @Html.Partial("~/Views/Shared/_FilteredAssignCourseTeacher.cshtml")
+        </div>
+       
+        <div id="section-data4">
+            @Html.Partial("~/Views/Shared/_FilteredAssignCourse.cshtml")
+        </div>
+
+        <div id="section-data2">
+            @Html.Partial("~/Views/Shared/_FilteredAssignCourseCombo.cshtml")
+        </div>
+        
+        <div id="section-data3">
+            @Html.Partial("~/Views/Shared/_FilteredCourse.cshtml")
+        </div>
+
+        <p>
+            <input type="submit" value="Assign" id="submitButton" class="btn btn-primary"/>
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+    function FillData(id) {
+        $("#section-data").load("/AssignCourse/FilteredSection", { departmentId: id });
+        $("#section-data2").load("/AssignCourse/FilteredSection2", { departmentId: id });
+    }
+    
+    $(function () {
+        $("#DepartmentId").change(function () {
+            var id = $("#DepartmentId").val();
+            FillData(id);
+        });
+        
+        $("#submitButton").click(function () {
+            
+            var assign = $("#assigning").val();
+            var remaining = $("#remaining").val();
+            
+            //if (remaining == "") {
+            //    alert("Please Select Teacher before Assign");
+            //    return false;
+            //}
+            
+            if ((remaining - assign) < 0) {
+                var answer = confirm('Are you sure you want to assign this course to this teacher?');
+                if (answer) {
+                    $("#assignCourse").submit();
+                }
+                else {
+                    return false;
+                }
+            } else {
+                $("#assignCourse").submit();
+            }
+        });
+    });
+    
+
+
+    
+</script>
+
+
+

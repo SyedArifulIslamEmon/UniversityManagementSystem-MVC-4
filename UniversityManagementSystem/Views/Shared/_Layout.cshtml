@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/Content/anytime.5.0.1-1403131246.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/bootstrap_css/bootstrap.min.css")
+    @*  @Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-2.6.2.js")" type="text/javascript"></script>
+    <script src="~/Scripts/anytime.5.0.1-1403131246.js"></script>
+    <script src="~/Scripts/anytimetz.js"></script>
+    <style>
+        .field-validation-error {
+            color: #e80c4d;
+            font-weight: bold;
+        }
+
+        .field-validation-valid {
+            display: none;
+        }
+
+        input.input-validation-error {
+            border: 1px solid #e80c4d;
+        }
+
+        input[type="checkbox"].input-validation-error {
+            border: 0 none;
+        }
+
+        .validation-summary-errors {
+            color: #e80c4d;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .validation-summary-valid {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-2">
+                    <p class="img-responsive"><img src="~/Images/logo.png" /></p>
+                </div>
+                <div class="col-lg-10">
+                    <h3>@Html.ActionLink("Institute of Technical and Vocational Education and Training (ITVET)", "Index", "Home")</h3>
+                </div>
+            </div>
+
+
+            <nav class="navbar navbar-inverse" role="navigation">
+
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">University Management System</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Department Entry", "Create", "Department")</li>
+                            <li>@Html.ActionLink("Course Entry", "Create", "Course")</li>
+                            <li>@Html.ActionLink("Teacher Entry", "Create", "Teacher")</li>
+                            <li>@Html.ActionLink("Student Entry", "Create", "Student")</li>
+                            <li>@Html.ActionLink("Assign Course", "Create", "AssignCourse")</li>
+
+                        
+                        </ul>
+
+
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+
+
+            </nav>
+
+
+        </div>
+    </header>
+    <div class="row">
+        <div class="container">
+            <br />
+            <div class="col-md-2 col-xs-12">
+                <ul>
+                    <li>@Html.ActionLink("Course Info", "CourseStatus", "AssignCourse")</li>
+                    <li>@Html.ActionLink("Course Enroll", "Create", "EnrollCourse")</li>
+                    <li>@Html.ActionLink("Result Entry", "Create", "Result")</li>
+                    <li>@Html.ActionLink("Room Allocate", "Create", "RoomAllocation")</li>
+                    <li>@Html.ActionLink("Class Schedule", "ViewClassSchedule", "RoomAllocation")</li>
+                    <li>@Html.ActionLink("View Result", "ViewResult", "Result")</li>
+                </ul>
+            </div>
+            <div class="col-md-10 col-xs-12">
+
+                @RenderSection("featured", required: false)
+                <section>
+                    @RenderBody()
+                </section>
+            </div>
+        </div>
+    </div>
+    <footer class="container">
+        <div class="content-wrapper">
+            <div class="nav navbar-nav float-left">
+                <p>&copy; @DateTime.Now.Year - BholaSoft contact us +8801924262749 </p>
+
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/Scripts/bootstrap_js/bootstrap.min.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,49 @@
+﻿@using System.Activities.Expressions
+
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["error"]
+    </div>
+}
+
+<table class="table table-bordered table-striped">
+    
+    <tr>
+        <th>Course Code</th>
+        <th>Course Name</th>
+        <th>Semester</th>
+        <th>Assigned To</th>
+    </tr>
+    @if (ViewBag.Result != null)
+    {
+        foreach (var c in ViewBag.Result)
+        {
+            <tr>
+                <td>@c.CourseCode</td>
+                <td>@c.CourseName</td>
+                <td>@c.SemesterName</td>
+                    @if (c.TeacherName == null)
+                    {
+                        <td>Not Assigned Yet</td>
+                    }
+                    else
+                    {
+                        <td>@c.TeacherName</td>
+                    }
+                
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+    }
+    
+
+</table>

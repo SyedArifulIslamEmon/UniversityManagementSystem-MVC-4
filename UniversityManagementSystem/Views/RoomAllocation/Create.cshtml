@@ -1,0 +1,273 @@
+﻿@model UniversityManagementSystem.Models.RoomAllocation
+
+@{
+    ViewBag.Title = "Allocate Class Room";
+}
+<style>
+    #field2 {
+        background-image: url("clock.png");
+        background-position: right center;
+        background-repeat: no-repeat;
+        border: 1px solid #3090c0;
+        color: #000000;
+        font-weight: bold;
+    }
+
+    #AnyTime--field2 {
+        background-color: #EFEFEF;
+        border: 1px solid #CCC;
+    }
+
+        #AnyTime--field2 * {
+            font-weight: bold;
+        }
+
+        #AnyTime--field2 .AnyTime-btn {
+            background-color: #F9F9FC;
+            border: 1px solid #CCC;
+            color: #3090C0;
+        }
+
+        #AnyTime--field2 .AnyTime-cur-btn {
+            background-color: #FCF9F6;
+            border: 1px solid black;
+            color: #FFC030;
+        }
+
+        #AnyTime--field2 .AnyTime-focus-btn {
+            border-style: dotted;
+        }
+
+        #AnyTime--field2 .AnyTime-lbl {
+            color: black;
+        }
+
+        #AnyTime--field2 .AnyTime-hdr {
+            background-color: #3090c0;
+            color: white;
+        }
+
+
+
+
+
+    #field3 {
+        background-image: url("clock.png");
+        background-position: right center;
+        background-repeat: no-repeat;
+        border: 1px solid #3090c0;
+        color: #000000;
+        font-weight: bold;
+    }
+
+    #AnyTime--field3 {
+        background-color: #EFEFEF;
+        border: 1px solid #CCC;
+    }
+
+        #AnyTime--field3 * {
+            font-weight: bold;
+        }
+
+        #AnyTime--field3 .AnyTime-btn {
+            background-color: #F9F9FC;
+            border: 1px solid #CCC;
+            color: #3090C0;
+        }
+
+        #AnyTime--field3 .AnyTime-cur-btn {
+            background-color: #FCF9F6;
+            border: 1px solid black;
+            color: #FFC030;
+        }
+
+        #AnyTime--field3 .AnyTime-focus-btn {
+            border-style: dotted;
+        }
+
+        #AnyTime--field3 .AnyTime-lbl {
+            color: black;
+        }
+
+        #AnyTime--field3 .AnyTime-hdr {
+            background-color: #3090c0;
+            color: white;
+        }
+</style>
+
+<h2>Allocate Class Room</h2><hr/>
+@if (@ViewData["error"] != null)
+{
+    <div class="alert alert-danger">
+        @ViewData["error"]
+    </div>
+}
+@if (@ViewBag.roomAllocationTable != null)
+{
+    <div class="alert alert-danger">Overlaping Problem</div>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Department Name</th>
+            <th>Course Code</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+        </tr>
+        
+        @foreach (var r in ViewBag.roomAllocationTable)
+        {
+            var sTime = r.StartTime.ToString().Replace(".", ":");
+            var eTime = r.EndTime.ToString().Replace(".", ":");
+            
+            if (sTime.Length > 1)
+            {
+                sTime += ((sTime[sTime.Length - 2]) == ':') ? "0" : "";
+            }
+            if (eTime.Length > 1)
+            {
+                eTime += ((eTime[eTime.Length - 2]) == ':') ? "0" : "";
+            }
+            
+            <tr>
+                <td>@r.Department.Name</td>
+                <td>@r.Course.Code</td>
+                <td>@sTime</td>
+                <td>@eTime</td>
+            </tr>
+        }
+        
+    </table>
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "roomAllocationForm" })){
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DepartmentId, "Department")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("DepartmentId", String.Empty)
+            @Html.ValidationMessageFor(model => model.DepartmentId)
+        </div>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.CourseId, "Course")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("CourseId", String.Empty)
+            @Html.ValidationMessageFor(model => model.CourseId)
+        </div>*@
+        
+        <div id="section-data">
+            @Html.Partial("~/Views/Shared/_FilteredCoursesRoomAllocation.cshtml")
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RoomId, "Room")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("RoomId", String.Empty)
+            @Html.ValidationMessageFor(model => model.RoomId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DayId, "Day")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("DayId", String.Empty)
+            @Html.ValidationMessageFor(model => model.DayId)
+        </div>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.StartTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StartTime)
+            @Html.ValidationMessageFor(model => model.StartTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EndTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EndTime)
+            @Html.ValidationMessageFor(model => model.EndTime)
+        </div>*@
+        
+        <label>From:</label><br/>
+        <input type="text" id="field2" name="StartTime"/>
+        @Html.ValidationMessageFor(model => model.StartTime)
+        <br /><label>To:</label><br/>
+        <input type="text" id="field3" name="EndTime"/>
+        @Html.ValidationMessageFor(model => model.EndTime)
+        <br /><br />
+        <p>
+            <input type="submit" value="Allocate" class="btn btn-primary" id="submitButton" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<script type="text/javascript">
+    function FillData(id) {
+        $("#section-data").load("/RoomAllocation/FilteredSection", { departmentId: id });
+    }
+
+    $(function () {
+        $("#DepartmentId").change(function () {
+            var id = $("#DepartmentId").val();
+            FillData(id);
+        });
+    });
+</script>
+
+
+
+<script>
+
+    $("#field2").AnyTime_picker(
+      {
+          format: "%H:%i", labelTitle: "Class Schedule",
+          labelHour: "Hour", labelMinute: "Minute"
+      });
+    $("#field3").AnyTime_picker(
+      {
+          format: "%H:%i", labelTitle: "Class Schedule",
+          labelHour: "Hour", labelMinute: "Minute"
+      });
+
+    $(document).ready(function () {
+        $("#submitButton").click(function () {
+            var startTime = $('#field2').val().replace(":", ".");
+            var endTime = $('#field3').val().replace(":", ".");
+
+            //if (startTime >= endTime) {
+            //    alert("From Field Time should be less than To Field");
+            //    return false;
+            //}
+            
+            $('#field2').val(startTime);
+            $('#field3').val(endTime);
+
+            $("#roomAllocationForm").submit();
+        });
+    });
+   
+</script>
+
+
+
+
+
+
+

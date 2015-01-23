@@ -1,0 +1,67 @@
+﻿@model IEnumerable<UniversityManagementSystem.Models.RoomAllocation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table table-striped table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Department.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.Code)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Room.Name)*@
+            Room
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Day.Name)*@
+            Day
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.StartTime)*@
+            Start Time
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.EndTime)*@
+            End Time
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Room.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Day.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RoomAllocationId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RoomAllocationId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RoomAllocationId })
+        </td>
+    </tr>
+}
+
+</table>

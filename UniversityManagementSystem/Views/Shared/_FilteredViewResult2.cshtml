@@ -1,0 +1,77 @@
+﻿
+
+@if (@ViewBag.Student != null)
+{
+    string dept = "";
+    foreach (var d in @ViewBag.Dept)
+    {
+        dept = d;
+    }
+    foreach (var student in ViewBag.Student)
+    {
+        <label>Name</label>
+        <br>
+        <input type="text" name="Name" value="@student.Name" readonly=""/><br>
+        <label>Email</label> <br>
+        <input type="text" name="Email" value="@student.Email" readonly=""/><br>
+        <label>Department</label> <br>
+        <input type="text" name="DepartmentId" value="@dept" readonly=""/><br>
+    }
+    <br/>
+    <button name="makePdf" class="btn btn-primary">Make PDF</button>
+    <br/><br/>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                Course Code
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Grade
+            </th>
+        </tr>
+
+        @if (@ViewBag.Result != null)
+        {
+            foreach (var item in ViewBag.Result)
+            {
+                <tr>
+                    <td>
+                        @item.CourseCode
+                    </td>
+                    <td>
+                        @item.CourseName
+                    </td>
+                    <td>
+                        @item.CourseGrade
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+
+    }
+    else
+    {
+    <p><label>Name</label><p></p> <input type="text" name="Name" readonly=""/></p>
+    <p><label>Email</label><p></p> <input type="text" name="Email" readonly=""/></p>
+    <p><label>Department</label><p></p> <input type="text" name="DepartmentId" readonly=""/></p>
+    <button name="makePdf" class="btn btn-primary">Make PDF</button>
+    <br/><br/>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                Course Code
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Grade
+            </th>
+        </tr>
+    </table>
+    }
+    

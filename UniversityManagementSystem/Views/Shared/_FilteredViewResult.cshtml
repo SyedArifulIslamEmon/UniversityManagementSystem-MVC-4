@@ -1,0 +1,21 @@
+﻿@using UniversityManagementSystem.Models
+
+
+@if (@ViewBag.Student != null)
+{
+    foreach (var student in ViewBag.Student)
+    {
+        <label>Name</label> <br>
+        <input type="text" name="Name" value="@student.Name" /><br>
+        <label>Email</label> <br>
+        <input type="text" name="Email" value="@student.Email" /><br>
+        <label>Department</label> <br>
+        <input type="text" name="DepartmentId" value="@student.DepartmentId" /><br>
+    }
+}
+else
+{
+    <p><label>Name</label><p></p> <input type="text" name="Name" /></p>
+    <p><label>Email</label><p></p> <input type="text" name="Email" /></p>
+    <p><label>Department</label><p></p> <input type="text" name="DepartmentId" /></p>
+}

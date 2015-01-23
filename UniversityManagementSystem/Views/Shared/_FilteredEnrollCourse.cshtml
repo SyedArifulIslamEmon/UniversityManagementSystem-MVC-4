@@ -1,0 +1,49 @@
+﻿@using UniversityManagementSystem.Models
+@model UniversityManagementSystem.Models.EnrollCourse
+
+
+@if (@ViewBag.Student != null)
+{
+    string dept = "";
+
+    if (ViewBag.dept != null)
+    {
+        foreach (var d in @ViewBag.Dept)
+        {
+            dept = d;
+        }
+    }
+    foreach (var student in ViewBag.Student)
+    {
+        <label>Name</label> <br>
+        <input type="text" name="Name" value="@student.Name" readonly=""/><br>
+        <label>Email</label> <br>
+        <input type="text" name="Email" value="@student.Email" readonly=""/><br>
+        <label>Department</label> <br>
+        <input type="text" name="DepartmentId" value="@dept" readonly=""/><br>
+    }
+    <label>Select Course</label> <br>
+    <select id="CourseId" name="CourseId">
+        <option value="">Select Course</option>
+        @foreach (var course in ViewBag.Course)
+        {
+            <option value="@course.Id">@course.Name</option>
+        }
+    </select>
+}
+else
+{
+    <p><label>Name</label><p></p> <input type="text" name="Name" readonly=""/></p>
+    <p><label>Email</label><p></p> <input type="text" name="Email" readonly=""/></p>
+    <p><label>Department</label><p></p> <input type="text" name="DepartmentId" readonly=""/></p>
+    <div class="editor-label">
+            @Html.LabelFor(model => model.CourseId)
+        </div>
+        <div class="editor-field">
+            @*@Html.DropDownList("CourseId", String.Empty)*@
+            <select id="CourseId" name="CourseId">
+                <option value="">Select Course</option>
+            </select>
+                @Html.ValidationMessageFor(model => model.CourseId)
+</div>
+}
